@@ -1,0 +1,24 @@
+{
+  "name": "webshop-shop-backend",
+  "version": "1.0.0",
+  "description": "Webshop backend for school project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frommflin/webshop-shop-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Frommflin/webshop-shop-backend/issues"
+  },
+  "homepage": "https://github.com/Frommflin/webshop-shop-backend#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
