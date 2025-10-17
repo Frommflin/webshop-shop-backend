@@ -1,0 +1,56 @@
+name: Node.js CI (Auth Backend)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Debug workspace
+        run: |
+          pwd
+          ls -la
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build backend
+        run: npm run build --if-present
+
+      - name: Run tests
+        run: npm test --if-present
+
+      - name: Discord success-report
+        if: ${{ success() }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_AUTH_BACKEND }}
+          noprefix: true
+          title: "✅ Backend Build succeeded"
+          color: 0x366336
+          username: Github Actions
+
+      - name: Discord failure-report
+        if: ${{ failure() }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_AUTH_BACKEND }}
+          noprefix: true
+          title: "❌ Backend Build failed"
+          color: 0x4d1717
+          username: Github Actions
