@@ -1,4 +1,4 @@
-name: Node.js CI (Auth Backend)
+name: Node.js CI
 
 on:
   push:
@@ -29,8 +29,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build backend
-        run: npm run build --if-present
+      - name: Run backend server
+        run: npm run start --if-present
 
       - name: Discord success-report
         if: ${{ success() }}
@@ -38,7 +38,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           noprefix: true
-          title: "✅ Backend Build succeeded"
+          title: "✅ Webshop server-start succeeded"
           color: 0x366336
           username: Github Actions
 
@@ -48,6 +48,6 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           noprefix: true
-          title: "❌ Backend Build failed"
+          title: "❌ Webshop server-start failed"
           color: 0x4d1717
           username: Github Actions
