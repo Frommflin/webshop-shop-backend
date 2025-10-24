@@ -1,23 +1,9 @@
 import express from "express";
+import productRoutes from "./routers/productRoutes.js";
 
 const app = express();
 
-// Products routes
-app.get("/products", (req, res) => {
-  res.send(`Get all products`);
-});
-app.get("/products/:id", (req, res) => {
-  res.send(`Product id ${req.params.id}`);
-});
-app.post("/products", (req, res) => {
-  res.send(`Create new product`);
-});
-app.put("/products/:id", (req, res) => {
-  res.send(`Update product with id ${req.params.id}`);
-});
-app.delete("/products/:id", (req, res) => {
-  res.send(`Delete product with id ${req.params.id}`);
-});
+app.use("/products", productRoutes);
 
 // Order routes
 app.get("/orders", (req, res) => {
