@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Webshop backend for school project",
   "main": "server.js",
+  "type": "module",
   "engines": {
     "node": "22.20.0",
     "npm": "10.9.3"
