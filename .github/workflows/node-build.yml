@@ -30,7 +30,15 @@ jobs:
         run: npm ci
 
       - name: Run backend server
-        run: npm run start --if-present
+        run: |
+          node -e "
+          import connectDB, { closeDB } from './src/config/db.js';
+          (async () => {
+            await connectDB();
+            await closeDB();
+            process.exit(0);
+          })();
+          "
 
       - name: Discord success-report
         if: ${{ success() }}
