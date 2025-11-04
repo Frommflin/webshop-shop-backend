@@ -1,11 +1,10 @@
 import express from "express";
+import { createProduct } from "../controllers/productController.js";
 
 const router = express.Router();
 
 // ==== CREATE ====
-router.post("/", (req, res) => {
-  res.send(`Create new product`);
-});
+router.post("/", createProduct);
 
 // ==== READ ====
 router.get("/", (req, res) => {
