@@ -1,5 +1,5 @@
 import express from "express";
-import { createProduct } from "../controllers/productController.js";
+import { createProduct, getProducts, getProductById } from "../controllers/productController.js";
 
 const router = express.Router();
 
@@ -7,20 +7,20 @@ const router = express.Router();
 router.post("/", createProduct);
 
 // ==== READ ====
-router.get("/", (req, res) => {
-  res.send(`Get all products`);
-});
+// Hämta lista med produkter (stöd för pagination/filter via query params)
+router.get("/", getProducts);
 
-router.get("/:id", (req, res) => {
-  res.send(`Product id ${req.params.id}`);
-});
+// Hämta en produkt per id
+router.get("/:id", getProductById);
 
 // ==== UPDATE ====
+// Knyt till en update-controller senare, t.ex. updateProduct
 router.put("/:id", (req, res) => {
   res.send(`Update product with id ${req.params.id}`);
 });
 
 // ==== DELETE ====
+// Knyt till en delete-controller senare, t.ex. deleteProduct
 router.delete("/:id", (req, res) => {
   res.send(`Delete product with id ${req.params.id}`);
 });
