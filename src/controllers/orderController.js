@@ -1,13 +1,14 @@
 import Order from "../models/Order.Models.js";
 export const createOrder = async (req, res) => {
   try {
-    const { items, totalPrice } = req.body;
+    const { items, totalAmount } = req.body;
 
     // GDPR 25 – endast nödvändiga uppgifter lagras
     const order = await Order.create({
-      user: req.user.id,
+       userId: req.user.id,
+       userName: req.user.name,
       items,
-      totalPrice,
+      totalAmount,
       createdAt: new Date()
     });
 
